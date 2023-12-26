@@ -1,0 +1,13 @@
+﻿.navbar-nav .nav-link {
+    color: #106585;
+    font-weight: bold;
+    font-size: 20px; 
+    margin-right: 20px;
+}
+
+/* Border under the navbar */
+.navbar {
+    border-bottom: 2px solid #106585; 
+
+}
+

@@ -1,0 +1,29 @@
+﻿
+.body {
+
+    background-color :aliceblue ;
+
+
+}
+.header {
+    color: #106585;
+    padding: 20px;
+    text-align: center;
+}
+
+.jumbotron {
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.image-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="091f86077fb14f7fb87c2f8d5bca725f" Name="Diagram1">
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Admin_" Width="1.5" PointX="3.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Fatura" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Indirim" Width="1.5" PointX="5.5" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Kategori" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.KISI" Width="1.5" PointX="1.5" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.KULLANCILAR" Width="1.5" PointX="1.5" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Marka" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.OdemeYonetimi" Width="1.5" PointX="0.75" PointY="19.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Sipari" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.SiparisUrun" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Urun" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KirtasiyeParkModel.Yorum" Width="1.5" PointX="3.75" PointY="12.875" IsExpanded="true" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_Fat_Kul2" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_SiparisfaturaID" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_IndirimUrun" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_urunkategori" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_kisiID" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_SiparisKullanci" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_yorum" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_MarkaID" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_TodemeyonID" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_siparisurunid" ManuallyRouted="false" />
+        <AssociationConnector Association="KirtasiyeParkModel.FK_Urun_UrunSiparis" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

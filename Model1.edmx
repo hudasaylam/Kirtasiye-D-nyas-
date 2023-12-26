@@ -1,0 +1,835 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KirtasiyeParkModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin_">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="FaturaID" />
+          </Key>
+          <Property Name="FaturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="faturaTarihi" Type="datetime" />
+          <Property Name="ToplamFiyat" Type="float" />
+          <Property Name="KisiID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Indirim">
+          <Key>
+            <PropertyRef Name="IndirimNo" />
+          </Key>
+          <Property Name="IndirimNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="YeniFiyat" Type="int" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="KISI">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyad" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KisiRolu" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="70" />
+          <Property Name="Parola" Type="varchar" MaxLength="70" />
+        </EntityType>
+        <EntityType Name="KULLANCILAR">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KullanciID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="MarkaID" />
+          </Key>
+          <Property Name="MarkaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarkaIsmi" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="OdemeYonetimi">
+          <Key>
+            <PropertyRef Name="OdemeID" />
+          </Key>
+          <Property Name="OdemeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OdemeYonetimi" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Siparis">
+          <Key>
+            <PropertyRef Name="siparisID" />
+          </Key>
+          <Property Name="siparisID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Toplam_Tutar" Type="float" Nullable="false" />
+          <Property Name="Fatura_No" Type="int" />
+          <Property Name="KisiID" Type="int" />
+          <Property Name="Odeme_YonetimiID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiparisUrun">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SiparisID" Type="int" />
+          <Property Name="Fatura_No" Type="int" />
+          <Property Name="UrunID" Type="int" />
+          <Property Name="BirimFiyat" Type="float" />
+          <Property Name="Miktar" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ad" Type="varchar" MaxLength="255" />
+          <Property Name="Stok_Miktari" Type="int" />
+          <Property Name="BirimFiyat" Type="float" />
+          <Property Name="KategoriID" Type="int" />
+          <Property Name="MarkaID" Type="int" Nullable="false" />
+          <Property Name="ResimURL" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="YorumNo" />
+          </Key>
+          <Property Name="YorumNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YorumMetni" Type="varchar" MaxLength="1000" />
+          <Property Name="KisiID" Type="int" />
+        </EntityType>
+        <Association Name="FK_Admin">
+          <End Role="KISI" Type="Self.KISI" Multiplicity="1" />
+          <End Role="Admin_" Type="Self.Admin_" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KISI">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Admin_">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fat_Kul2">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndirimUrun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Indirim" Type="Self.Indirim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Indirim">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kisiID">
+          <End Role="KISI" Type="Self.KISI" Multiplicity="1" />
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KISI">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkaID">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="MarkaID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="MarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisfaturaID">
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fatura">
+              <PropertyRef Name="FaturaID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Fatura_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisKullanci">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siparisurunid">
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="0..1" />
+          <End Role="SiparisUrun" Type="Self.SiparisUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparis">
+              <PropertyRef Name="siparisID" />
+            </Principal>
+            <Dependent Role="SiparisUrun">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TodemeyonID">
+          <End Role="OdemeYonetimi" Type="Self.OdemeYonetimi" Multiplicity="1" />
+          <End Role="Siparis" Type="Self.Siparis" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OdemeYonetimi">
+              <PropertyRef Name="OdemeID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Odeme_YonetimiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_UrunSiparis">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="SiparisUrun" Type="Self.SiparisUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="SiparisUrun">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunkategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_yorum">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KirtasiyeParkModelStoreContainer">
+          <EntitySet Name="Admin_" EntityType="Self.Admin_" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Indirim" EntityType="Self.Indirim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KISI" EntityType="Self.KISI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KULLANCILAR" EntityType="Self.KULLANCILAR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Marka" EntityType="Self.Marka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OdemeYonetimi" EntityType="Self.OdemeYonetimi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Siparis" EntityType="Self.Siparis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiparisUrun" EntityType="Self.SiparisUrun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yorum" EntityType="Self.Yorum" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin" Association="Self.FK_Admin">
+            <End Role="KISI" EntitySet="KISI" />
+            <End Role="Admin_" EntitySet="Admin_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fat_Kul2" Association="Self.FK_Fat_Kul2">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILAR" />
+            <End Role="Fatura" EntitySet="Fatura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndirimUrun" Association="Self.FK_IndirimUrun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="Indirim" EntitySet="Indirim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kisiID" Association="Self.FK_kisiID">
+            <End Role="KISI" EntitySet="KISI" />
+            <End Role="KULLANCILAR" EntitySet="KULLANCILAR" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkaID" Association="Self.FK_MarkaID">
+            <End Role="Marka" EntitySet="Marka" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisfaturaID" Association="Self.FK_SiparisfaturaID">
+            <End Role="Fatura" EntitySet="Fatura" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisKullanci" Association="Self.FK_SiparisKullanci">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILAR" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siparisurunid" Association="Self.FK_siparisurunid">
+            <End Role="Siparis" EntitySet="Siparis" />
+            <End Role="SiparisUrun" EntitySet="SiparisUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TodemeyonID" Association="Self.FK_TodemeyonID">
+            <End Role="OdemeYonetimi" EntitySet="OdemeYonetimi" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_UrunSiparis" Association="Self.FK_Urun_UrunSiparis">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="SiparisUrun" EntitySet="SiparisUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunkategori" Association="Self.FK_urunkategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_yorum" Association="Self.FK_yorum">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILAR" />
+            <End Role="Yorum" EntitySet="Yorum" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KirtasiyeParkModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin_">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KISI" Relationship="Self.FK_Admin" FromRole="Admin_" ToRole="KISI" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="FaturaID" />
+          </Key>
+          <Property Name="FaturaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="faturaTarihi" Type="DateTime" Precision="3" />
+          <Property Name="ToplamFiyat" Type="Double" />
+          <Property Name="KisiID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="KULLANCILAR" Relationship="Self.FK_Fat_Kul2" FromRole="Fatura" ToRole="KULLANCILAR" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK_SiparisfaturaID" FromRole="Fatura" ToRole="Siparis" />
+        </EntityType>
+        <EntityType Name="Indirim">
+          <Key>
+            <PropertyRef Name="IndirimNo" />
+          </Key>
+          <Property Name="IndirimNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="YeniFiyat" Type="Int32" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_IndirimUrun" FromRole="Indirim" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="KategoriID" />
+          </Key>
+          <Property Name="KategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Uruns" Relationship="Self.FK_urunkategori" FromRole="Kategori" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="KISI">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KisiRolu" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="Parola" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin_" Relationship="Self.FK_Admin" FromRole="KISI" ToRole="Admin_" />
+          <NavigationProperty Name="KULLANCILAR" Relationship="Self.FK_kisiID" FromRole="KISI" ToRole="KULLANCILAR" />
+        </EntityType>
+        <EntityType Name="KULLANCILAR">
+          <Key>
+            <PropertyRef Name="KisiID" />
+          </Key>
+          <Property Name="KisiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KullanciID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Faturas" Relationship="Self.FK_Fat_Kul2" FromRole="KULLANCILAR" ToRole="Fatura" />
+          <NavigationProperty Name="KISI" Relationship="Self.FK_kisiID" FromRole="KULLANCILAR" ToRole="KISI" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK_SiparisKullanci" FromRole="KULLANCILAR" ToRole="Siparis" />
+          <NavigationProperty Name="Yorums" Relationship="Self.FK_yorum" FromRole="KULLANCILAR" ToRole="Yorum" />
+        </EntityType>
+        <EntityType Name="Marka">
+          <Key>
+            <PropertyRef Name="MarkaID" />
+          </Key>
+          <Property Name="MarkaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarkaIsmi" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Uruns" Relationship="Self.FK_MarkaID" FromRole="Marka" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="OdemeYonetimi">
+          <Key>
+            <PropertyRef Name="OdemeID" />
+          </Key>
+          <Property Name="OdemeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OdemeYonetimi1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Siparis" Relationship="Self.FK_TodemeyonID" FromRole="OdemeYonetimi" ToRole="Siparis" />
+        </EntityType>
+        <EntityType Name="Sipari">
+          <Key>
+            <PropertyRef Name="siparisID" />
+          </Key>
+          <Property Name="siparisID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Toplam_Tutar" Type="Double" Nullable="false" />
+          <Property Name="Fatura_No" Type="Int32" />
+          <Property Name="KisiID" Type="Int32" />
+          <Property Name="Odeme_YonetimiID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fatura" Relationship="Self.FK_SiparisfaturaID" FromRole="Siparis" ToRole="Fatura" />
+          <NavigationProperty Name="KULLANCILAR" Relationship="Self.FK_SiparisKullanci" FromRole="Siparis" ToRole="KULLANCILAR" />
+          <NavigationProperty Name="OdemeYonetimi" Relationship="Self.FK_TodemeyonID" FromRole="Siparis" ToRole="OdemeYonetimi" />
+          <NavigationProperty Name="SiparisUruns" Relationship="Self.FK_siparisurunid" FromRole="Siparis" ToRole="SiparisUrun" />
+        </EntityType>
+        <EntityType Name="SiparisUrun">
+          <Key>
+            <PropertyRef Name="No" />
+          </Key>
+          <Property Name="No" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SiparisID" Type="Int32" />
+          <Property Name="Fatura_No" Type="Int32" />
+          <Property Name="UrunID" Type="Int32" />
+          <Property Name="BirimFiyat" Type="Double" />
+          <Property Name="Miktar" Type="Int32" />
+          <NavigationProperty Name="Sipari" Relationship="Self.FK_siparisurunid" FromRole="SiparisUrun" ToRole="Siparis" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_Urun_UrunSiparis" FromRole="SiparisUrun" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="UrunID" />
+          </Key>
+          <Property Name="UrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ad" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Stok_Miktari" Type="Int32" />
+          <Property Name="BirimFiyat" Type="Double" />
+          <Property Name="KategoriID" Type="Int32" />
+          <Property Name="MarkaID" Type="Int32" Nullable="false" />
+          <Property Name="ResimURL" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Indirims" Relationship="Self.FK_IndirimUrun" FromRole="Urun" ToRole="Indirim" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_urunkategori" FromRole="Urun" ToRole="Kategori" />
+          <NavigationProperty Name="Marka" Relationship="Self.FK_MarkaID" FromRole="Urun" ToRole="Marka" />
+          <NavigationProperty Name="SiparisUruns" Relationship="Self.FK_Urun_UrunSiparis" FromRole="Urun" ToRole="SiparisUrun" />
+        </EntityType>
+        <EntityType Name="Yorum">
+          <Key>
+            <PropertyRef Name="YorumNo" />
+          </Key>
+          <Property Name="YorumNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YorumMetni" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="KisiID" Type="Int32" />
+          <NavigationProperty Name="KULLANCILAR" Relationship="Self.FK_yorum" FromRole="Yorum" ToRole="KULLANCILAR" />
+        </EntityType>
+        <Association Name="FK_Admin">
+          <End Role="KISI" Type="Self.KISI" Multiplicity="1" />
+          <End Role="Admin_" Type="Self.Admin_" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KISI">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Admin_">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fat_Kul2">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="1" />
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Fatura">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisfaturaID">
+          <End Role="Fatura" Type="Self.Fatura" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Sipari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fatura">
+              <PropertyRef Name="FaturaID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Fatura_No" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IndirimUrun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="Indirim" Type="Self.Indirim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="Indirim">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_urunkategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="KategoriID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="KategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kisiID">
+          <End Role="KISI" Type="Self.KISI" Multiplicity="1" />
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="KISI">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiparisKullanci">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <End Role="Siparis" Type="Self.Sipari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_yorum">
+          <End Role="KULLANCILAR" Type="Self.KULLANCILAR" Multiplicity="0..1" />
+          <End Role="Yorum" Type="Self.Yorum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANCILAR">
+              <PropertyRef Name="KisiID" />
+            </Principal>
+            <Dependent Role="Yorum">
+              <PropertyRef Name="KisiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MarkaID">
+          <End Role="Marka" Type="Self.Marka" Multiplicity="1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Marka">
+              <PropertyRef Name="MarkaID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="MarkaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TodemeyonID">
+          <End Role="OdemeYonetimi" Type="Self.OdemeYonetimi" Multiplicity="1" />
+          <End Role="Siparis" Type="Self.Sipari" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OdemeYonetimi">
+              <PropertyRef Name="OdemeID" />
+            </Principal>
+            <Dependent Role="Siparis">
+              <PropertyRef Name="Odeme_YonetimiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_siparisurunid">
+          <End Role="Siparis" Type="Self.Sipari" Multiplicity="0..1" />
+          <End Role="SiparisUrun" Type="Self.SiparisUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Siparis">
+              <PropertyRef Name="siparisID" />
+            </Principal>
+            <Dependent Role="SiparisUrun">
+              <PropertyRef Name="SiparisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_UrunSiparis">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="SiparisUrun" Type="Self.SiparisUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="UrunID" />
+            </Principal>
+            <Dependent Role="SiparisUrun">
+              <PropertyRef Name="UrunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KirtasiyeParkEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admin_" EntityType="Self.Admin_" />
+          <EntitySet Name="Faturas" EntityType="Self.Fatura" />
+          <EntitySet Name="Indirims" EntityType="Self.Indirim" />
+          <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="KISIs" EntityType="Self.KISI" />
+          <EntitySet Name="KULLANCILARs" EntityType="Self.KULLANCILAR" />
+          <EntitySet Name="Markas" EntityType="Self.Marka" />
+          <EntitySet Name="OdemeYonetimis" EntityType="Self.OdemeYonetimi" />
+          <EntitySet Name="Siparis" EntityType="Self.Sipari" />
+          <EntitySet Name="SiparisUruns" EntityType="Self.SiparisUrun" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Uruns" EntityType="Self.Urun" />
+          <EntitySet Name="Yorums" EntityType="Self.Yorum" />
+          <AssociationSet Name="FK_Admin" Association="Self.FK_Admin">
+            <End Role="KISI" EntitySet="KISIs" />
+            <End Role="Admin_" EntitySet="Admin_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fat_Kul2" Association="Self.FK_Fat_Kul2">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILARs" />
+            <End Role="Fatura" EntitySet="Faturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisfaturaID" Association="Self.FK_SiparisfaturaID">
+            <End Role="Fatura" EntitySet="Faturas" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IndirimUrun" Association="Self.FK_IndirimUrun">
+            <End Role="Urun" EntitySet="Uruns" />
+            <End Role="Indirim" EntitySet="Indirims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_urunkategori" Association="Self.FK_urunkategori">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="Urun" EntitySet="Uruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kisiID" Association="Self.FK_kisiID">
+            <End Role="KISI" EntitySet="KISIs" />
+            <End Role="KULLANCILAR" EntitySet="KULLANCILARs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiparisKullanci" Association="Self.FK_SiparisKullanci">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILARs" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_yorum" Association="Self.FK_yorum">
+            <End Role="KULLANCILAR" EntitySet="KULLANCILARs" />
+            <End Role="Yorum" EntitySet="Yorums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MarkaID" Association="Self.FK_MarkaID">
+            <End Role="Marka" EntitySet="Markas" />
+            <End Role="Urun" EntitySet="Uruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TodemeyonID" Association="Self.FK_TodemeyonID">
+            <End Role="OdemeYonetimi" EntitySet="OdemeYonetimis" />
+            <End Role="Siparis" EntitySet="Siparis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_siparisurunid" Association="Self.FK_siparisurunid">
+            <End Role="Siparis" EntitySet="Siparis" />
+            <End Role="SiparisUrun" EntitySet="SiparisUruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_UrunSiparis" Association="Self.FK_Urun_UrunSiparis">
+            <End Role="Urun" EntitySet="Uruns" />
+            <End Role="SiparisUrun" EntitySet="SiparisUruns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KirtasiyeParkModelStoreContainer" CdmEntityContainer="KirtasiyeParkEntities1">
+          <EntitySetMapping Name="Admin_">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Admin_">
+              <MappingFragment StoreEntitySet="Admin_">
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="AdminID" ColumnName="AdminID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faturas">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Fatura">
+              <MappingFragment StoreEntitySet="Fatura">
+                <ScalarProperty Name="FaturaID" ColumnName="FaturaID" />
+                <ScalarProperty Name="faturaTarihi" ColumnName="faturaTarihi" />
+                <ScalarProperty Name="ToplamFiyat" ColumnName="ToplamFiyat" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Indirims">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Indirim">
+              <MappingFragment StoreEntitySet="Indirim">
+                <ScalarProperty Name="IndirimNo" ColumnName="IndirimNo" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="YeniFiyat" ColumnName="YeniFiyat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KISIs">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.KISI">
+              <MappingFragment StoreEntitySet="KISI">
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="KisiRolu" ColumnName="KisiRolu" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Parola" ColumnName="Parola" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KULLANCILARs">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.KULLANCILAR">
+              <MappingFragment StoreEntitySet="KULLANCILAR">
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="KullanciID" ColumnName="KullanciID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Markas">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Marka">
+              <MappingFragment StoreEntitySet="Marka">
+                <ScalarProperty Name="MarkaID" ColumnName="MarkaID" />
+                <ScalarProperty Name="MarkaIsmi" ColumnName="MarkaIsmi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OdemeYonetimis">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.OdemeYonetimi">
+              <MappingFragment StoreEntitySet="OdemeYonetimi">
+                <ScalarProperty Name="OdemeID" ColumnName="OdemeID" />
+                <ScalarProperty Name="OdemeYonetimi1" ColumnName="OdemeYonetimi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Siparis">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Sipari">
+              <MappingFragment StoreEntitySet="Siparis">
+                <ScalarProperty Name="siparisID" ColumnName="siparisID" />
+                <ScalarProperty Name="Toplam_Tutar" ColumnName="Toplam_Tutar" />
+                <ScalarProperty Name="Fatura_No" ColumnName="Fatura_No" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+                <ScalarProperty Name="Odeme_YonetimiID" ColumnName="Odeme_YonetimiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiparisUruns">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.SiparisUrun">
+              <MappingFragment StoreEntitySet="SiparisUrun">
+                <ScalarProperty Name="No" ColumnName="No" />
+                <ScalarProperty Name="SiparisID" ColumnName="SiparisID" />
+                <ScalarProperty Name="Fatura_No" ColumnName="Fatura_No" />
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="Miktar" ColumnName="Miktar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uruns">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="UrunID" ColumnName="UrunID" />
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Stok_Miktari" ColumnName="Stok_Miktari" />
+                <ScalarProperty Name="BirimFiyat" ColumnName="BirimFiyat" />
+                <ScalarProperty Name="KategoriID" ColumnName="KategoriID" />
+                <ScalarProperty Name="MarkaID" ColumnName="MarkaID" />
+                <ScalarProperty Name="ResimURL" ColumnName="ResimURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yorums">
+            <EntityTypeMapping TypeName="KirtasiyeParkModel.Yorum">
+              <MappingFragment StoreEntitySet="Yorum">
+                <ScalarProperty Name="YorumNo" ColumnName="YorumNo" />
+                <ScalarProperty Name="YorumMetni" ColumnName="YorumMetni" />
+                <ScalarProperty Name="KisiID" ColumnName="KisiID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

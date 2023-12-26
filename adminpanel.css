@@ -1,0 +1,25 @@
+﻿body {
+    background-color: #f8f9fa;
+}
+
+.admin-menu {
+    background-color: #106585;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+    .admin-menu a {
+        color: white;
+        text-decoration: none;
+        margin-right: 10px;
+    }
+
+        .admin-menu a:hover {
+            text-decoration: underline;
+        }
+
+        .admin-menu a.active {
+            font-weight: bold;
+        }

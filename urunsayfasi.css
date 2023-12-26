@@ -1,0 +1,38 @@
+﻿.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 200px;
+    border-color: #106585;
+    text-align: center;
+}
+
+.product-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border-color: #106585;
+    margin-bottom: 10px;
+}
+
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-name-link {
+    text-decoration: none;
+    color: #106585;
+}
+.text-truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
